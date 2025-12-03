@@ -1,59 +1,29 @@
-# EpWorkspace
+# ep-ui
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.1.
+**ep-ui** es un conjunto de componentes, directivas y utilidades para Angular, diseñados para ofrecer un sistema UI moderno, consistente y altamente personalizable.  
+Incluye una demo integrada y está organizado como un workspace con múltiples librerías independientes.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Características
 
-```bash
-ng serve
-```
+- 🧩 Componentes reutilizables (botones, inputs, modales, tablas, etc.)
+- 🎨 Sistema de estilos globales con soporte para temas (light/dark)
+- 🧭 Librería de directivas útiles (tooltip, divider, actions, etc.)
+- 🧱 Arquitectura modular con librerías separadas:
+  - `@ep/components`
+  - `@ep/directives`
+  - `@ep/services`
+  - `@ep/global`
+- 🧪 Preparado para publicarse vía **npm**
+- 📦 Workspace Angular optimizado para desarrollo y escalabilidad
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 📦 Instalación
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+(Esto se actualizará cuando se publique en npm.)
 
 ```bash
-ng build
+npm install @ep/components
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
