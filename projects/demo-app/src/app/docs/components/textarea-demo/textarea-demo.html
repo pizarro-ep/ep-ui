@@ -1,0 +1,133 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 content-center">
+                <div class="flex items-center justify-center gap-3 w-full min-h-24 h-full">
+                    <ep-textarea [(ngModel)]="value"
+                                 [label]="label"
+                                 [placeholder]="placeholder ?? ' '"
+                                 [variant]="variant ?? 'outlined'"
+                                 [color]="color ?? 'secondary'"
+                                 [size]="size ?? 'md'"
+                                 [rounded]="rounded ?? 'md'"
+                                 [rows]="rows ?? 3"
+                                 [min]="min"
+                                 [max]="max"
+                                 [readonly]="readonly"
+                                 [disabled]="!!disabled"
+                                 [hasErrorMessage]="hasErrorMessage"
+                                 [hasErrorIcon]="hasErrorIcon"
+                                 [prependIcon]="prependIcon ? 'star' : undefined"
+                                 [appendIcon]="appendIcon ? 'star' : undefined"
+                                 [prependInnerIcon]="prependInnerIcon ? 'star' : undefined"
+                                 [appendInnerIcon]="appendInnerIcon ? 'star' : undefined"
+                                 [resize]="resize"
+                                 [clearable]="clearable"
+                                 [block]="block"
+                                 required />
+                </div>
+                <div class="flex gap-4 flex-col sm:flex-row">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 content-center">
+                        <ep-input label="ID"
+                                  size="xs"
+                                  [(ngModel)]="id" />
+                        <ep-input label="Label"
+                                  size="xs"
+                                  [(ngModel)]="label" />
+                        <ep-input label="Placeholder"
+                                  size="xs"
+                                  [(ngModel)]="placeholder" />
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [(ngModel)]="variant"
+                                   [items]="mapVariants" />
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [(ngModel)]="color"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Size"
+                                   [(ngModel)]="size"
+                                   [items]="mapSizes" />
+                        <ep-select size="xs"
+                                   label="Roundeds"
+                                   [(ngModel)]="rounded"
+                                   [items]="mapRoundeds" />
+                        <ep-input label="Rows"
+                                  type="number"
+                                  [min]="1"
+                                  size="xs"
+                                  [(ngModel)]="rows" />
+                        <ep-input label="Min Length"
+                                  type="number"
+                                  [min]="0"
+                                  size="xs"
+                                  [(ngModel)]="min" />
+                        <ep-input label="Max Length"
+                                  type="number"
+                                  [min]="1"
+                                  size="xs"
+                                  [(ngModel)]="max" />
+                        <ep-checkbox label="Readonly"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="readonly" />
+                        <ep-checkbox label="Disabled"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="disabled" />
+                        <ep-checkbox label="Error Message"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="hasErrorMessage" />
+                        <ep-checkbox label="Error Icon"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="hasErrorIcon" />
+                        <ep-checkbox label="Prepend Icon"
+                                     size="sm"
+                                     [(ngModel)]="prependIcon" />
+                        <ep-checkbox label="Append Icon"
+                                     size="sm"
+                                     [(ngModel)]="appendIcon" />
+                        <ep-checkbox label="Prepend Inner Icon"
+                                     size="sm"
+                                     [(ngModel)]="prependInnerIcon" />
+                        <ep-checkbox label="Append Inner Icon"
+                                     size="sm"
+                                     [(ngModel)]="appendInnerIcon" />
+                        <ep-checkbox label="Resize"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="resize" />
+                        <ep-checkbox label="Clearable"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="clearable" />
+                        <ep-checkbox label="Block"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="block" />
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

@@ -1,0 +1,72 @@
+<li class="grid w-full"
+    [ngClass]="listClass()">
+    @if (route) {
+    <a [routerLink]="route"
+       #rla="routerLinkActive"
+       routerLinkActive
+       [routerLinkActiveOptions]="{ exact: true }"
+       class="flex justify-between items-center space-x-2 w-full cursor-pointer"
+       (click)="emitClickEvent()"
+       [ngClass]="itemClass()">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </a>
+    } @else {
+    <div class="flex justify-between items-center space-x-2 w-full cursor-pointer"
+         [ngClass]="[itemClass(), listHasChildClass()]"
+         (click)="emitClickEvent()">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+    }
+    <!-- Subitems proyectados -->
+    @if (hasChild) {
+    <div class="flex w-full transition-all duration-300 ease-in-out overflow-hidden"
+         [ngClass]="subListClass()">
+        <div class="px-4"
+             [class.py-0.5]="_expanded()">
+            @if(divider){
+            <div [epDivider]="dividerClass"
+                 class="ms-0.5"></div>
+            }
+        </div>
+        <ng-content select="ep-list"></ng-content>
+    </div>
+    }
+
+    <ng-template #content>
+        <!-- Izquierda -->
+        <div class="flex flex-1 items-center gap-2">
+            @if(prependIcon) {
+            <ep-icon [icon]="prependIcon"
+                     [size]="_size()" />
+            }
+            <ng-container *ngTemplateOutlet="prependTpl?.template"></ng-container>
+            <div class="flex flex-1 flex-col gap-0.5">
+                <span class="leading-none text-left font-semibold origin-left select-none"
+                      [ngClass]="labelClass()">
+                    {{ label }}
+                </span>
+                @if(subLabel) {
+                <span class="leading-none text-left font-normal origin-left select-none opacity-95"
+                      [ngClass]="subLabelClass()">
+                    {{ subLabel }}
+                </span>
+                }
+            </div>
+        </div>
+        <!-- Derecha -->
+        @if(appendTpl || appendIcon || (expandable && expandedIcon)){
+        <div class="flex flex-none items-center gap-2">
+            <ng-container *ngTemplateOutlet="appendTpl?.template"></ng-container>
+            @if(appendIcon) {
+            <ep-icon [icon]="appendIcon"
+                     [size]="_size()"></ep-icon>
+            }
+            @if(hasChild && expandable && expandedIcon) {
+            <ep-icon icon="keyboard_arrow_right"
+                     [size]="_size()"
+                     [epRotate]="rotateClass" />
+            }
+        </div>
+        }
+    </ng-template>
+</li>

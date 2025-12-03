@@ -1,0 +1,21 @@
+<label class="h-full w-full inline-block relative cursor-pointer select-none"
+       [ngClass]="containerClass()"
+       [class.opacity-50]="isDisabled()"
+       [class.opacity-75]="readonly && !isDisabled()"
+       [class.pointer-events-none]="readonly || isDisabled()">
+    <input type="checkbox"
+           [checked]="value"
+           [disabled]="isDisabled()"
+           [indeterminate]="indeterminate"
+           (change)="onInputChange()"
+           class="peer sr-only" />
+    @if(variant()==='default'){
+    <!-- Track -->
+    <div class="absolute top-1/2 -translate-y-1/2 w-full rounded-full  transition-all"
+         [ngClass]="trackClass()">
+    </div>
+    }
+    <!-- Thumb -->
+    <div class="absolute rounded-full"
+         [ngClass]="thumbClass()"></div>
+</label>

@@ -1,0 +1,72 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-3">
+                <div class="flex w-full h-full items-center justify-center min-h-24">
+                    @if(slotSvg && !icon) {
+                    <ep-icon [variant]="variant"
+                             [color]="color"
+                             [size]="size">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 100 100"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="6"
+                             stroke-linecap="round"
+                             stroke-linejoin="round"
+                             class="w-full h-full">
+                            <path d="M20 20 H50 M20 50 H45 M20 80 H50" />
+                            <path d="M65 20 V80 M65 20 H90 Q95 20 95 35 Q95 50 90 50 H65" />
+                        </svg>
+                    </ep-icon>
+                    } @else {
+                    <ep-icon [icon]="icon"
+                             [variant]="variant"
+                             [color]="color"
+                             [size]="size" />
+                    }
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 items-center">
+                        <ep-input size="xs"
+                                  label="Icon"
+                                  [(ngModel)]="icon"></ep-input>
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [items]="mapVariants"
+                                   [(ngModel)]="variant"></ep-select>
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [items]="mapColors"
+                                   [(ngModel)]="color"></ep-select>
+                        <ep-select size="xs"
+                                   label="Size"
+                                   [items]="mapSizes"
+                                   [(ngModel)]="size"></ep-select>
+                        <ep-checkbox label="Slot: Svg"
+                                     size="sm"
+                                     [disabled]="!!icon"
+                                     [(ngModel)]="slotSvg"></ep-checkbox>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript"></app-code>
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

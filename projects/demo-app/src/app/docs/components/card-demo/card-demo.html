@@ -1,0 +1,124 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-3">
+                <div class="flex w-full h-full items-center justify-center min-h-24">
+                    <ep-card [label]="label"
+                             [subLabel]="subLabel"
+                             [text]="text"
+                             [href]="href"
+                             [variant]="variant ?? 'outlined'"
+                             [color]="color ?? 'secondary'"
+                             [size]="size ?? 'md'"
+                             [rounded]="rounded ?? 'md'"
+                             [hoverable]="hoverable"
+                             [disabled]="disabled"
+                             [prependIcon]="prependIcon ? 'star' : undefined"
+                             [appendIcon]="appendIcon ? 'star' : undefined">
+                        @if(slotTitle){
+                        <ng-template epTitle>
+                            Este es un título
+                        </ng-template>
+                        }
+                        @if(slotSubTitle){
+                        <ng-template epSubTitle>
+                            Este es un subtítulo
+                        </ng-template>
+                        }
+                        @if(slotContent){
+                        <ng-template epContent>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est
+                            labore voluptatibus!
+                        </ng-template>
+                        }
+                        @if(slotActions){
+                        <ng-template epActions>
+                            <ep-button value="ACTION BUTTON"></ep-button>
+                        </ng-template>
+                        }
+                    </ep-card>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 items-center">
+                        <ep-input size="xs"
+                                  label="Label"
+                                  [disabled]="!!slotTitle"
+                                  [(ngModel)]="label" />
+                        <ep-input size="xs"
+                                  label="SubLabel"
+                                  [disabled]="!!slotSubTitle"
+                                  [(ngModel)]="subLabel" />
+                        <ep-input size="xs"
+                                  label="Text"
+                                  [disabled]="!!slotContent"
+                                  [(ngModel)]="text" />
+                        <ep-input size="xs"
+                                  label="Href"
+                                  [(ngModel)]="href" />
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [(ngModel)]="variant"
+                                   [items]="mapVariants" />
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [(ngModel)]="color"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Size"
+                                   [(ngModel)]="size"
+                                   [items]="mapSizes" />
+                        <ep-select size="xs"
+                                   label="Rounded"
+                                   [(ngModel)]="rounded"
+                                   [items]="mapRoundeds" />
+                        <ep-checkbox label="Hoverable"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="hoverable" />
+                        <ep-checkbox label="Disabled"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="disabled" />
+                        <ep-checkbox label="Prepend Icon"
+                                     size="sm"
+                                     [disabled]="!slotTitle && !label && !slotSubTitle && !subLabel"
+                                     [(ngModel)]="prependIcon" />
+                        <ep-checkbox label="Append Icon"
+                                     size="sm"
+                                     [disabled]="!slotTitle && !label && !slotSubTitle && !subLabel"
+                                     [(ngModel)]="appendIcon" />
+                        <ep-checkbox label="Slot: Title"
+                                     size="sm"
+                                     [(ngModel)]="slotTitle" />
+                        <ep-checkbox label="Slot: Sub Title"
+                                     size="sm"
+                                     [(ngModel)]="slotSubTitle" />
+                        <ep-checkbox label="Slot: Content"
+                                     size="sm"
+                                     [(ngModel)]="slotContent" />
+                        <ep-checkbox label="Slot: Actions"
+                                     size="sm"
+                                     [(ngModel)]="slotActions" />
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

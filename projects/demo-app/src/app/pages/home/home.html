@@ -1,0 +1,61 @@
+<div class="px-6 py-16 max-w-5xl mx-auto">
+
+    <section class="text-center">
+        <h1 class="mb-3"
+            epText="color-primary weight-bold size-4xl">EP Components</h1>
+        <p epText="size-lg color-subtitle">
+            Librería moderna de componentes para Angular, hecha con Tailwind y EP Design.
+        </p>
+
+        <div class="mt-6 flex justify-center gap-3">
+            <ep-button color="primary"
+                       value="Ver Componentes"
+                       routerLink="/components"></ep-button>
+            <ep-button variant="outlined"
+                       value="Documentación"
+                       routerLink="/docs"></ep-button>
+        </div>
+    </section>
+
+    <section class="grid md:grid-cols-3 gap-6 mt-16">
+        <ep-card variant="tonal"
+                 label="⚡ Rendimiento"
+                 text="Carga rápida y diseño ligero.">
+        </ep-card>
+        <ep-card variant="tonal"
+                 label="🎨 Personalizable"
+                 text="Compatible con Tailwind y Theme Dark.">
+        </ep-card>
+        <ep-card variant="tonal"
+                 label="🧩 Componentes Reutilizables"
+                 text="Botones, inputs, dropdowns, tooltips, etc.">
+        </ep-card>
+    </section>
+
+    <section class="mt-16">
+        <h2 class="mb-4"
+            epText="color-title weight-bold size-2xl">Ejemplo rápido</h2>
+        <ep-card variant="tonal">
+            <ng-template epContent>
+                <app-code [codeTemplate]="codeTemplate" />
+            </ng-template>
+        </ep-card>
+    </section>
+
+    <section class="mt-16">
+        <h2 class="mb-6"
+            epText="color-title weight-bold size-2xl">Componentes destacados</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <ep-button color="primary"
+                       size="lg"
+                       [block]="true" />
+            <ep-input label="Input" />
+            <ep-select label="Select">
+                <ep-select-item label="Opción 1" />
+                <ep-select-item label="Opción 2" />
+                <ep-select-item label="Opción 3" />
+            </ep-select>
+        </div>
+    </section>
+
+</div>

@@ -1,0 +1,12 @@
+@if(headerComponent){
+<ng-content select="ep-appbar-header"></ng-content>
+}@else {
+<ep-appbar-header [size]="size"
+                  (onToggleMenu)="toggleMenu()" />
+}
+@if (isMenuOpen && (menuComponent?.existsItems || menuComponent?.menuList)) {
+<div epDivider="color-secondary thickness-2 opacity-50"></div>
+<div class="flex w-full max-h-[calc(100vh-80px)]">
+     <ng-content select="ep-appbar-menu"></ng-content>
+</div>
+}

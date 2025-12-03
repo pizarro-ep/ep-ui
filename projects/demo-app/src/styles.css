@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('./assets/fonts/outfit.css');
+@import "tailwindcss";
+@import "@ep/global/styles/theme.css";
+@import "@ep/global/styles/icons.css";
+@source "../../../node_modules/@ep/global";
+@source "../../../node_modules/@ep/components";

@@ -1,0 +1,23 @@
+{
+  "name": "@ep/global",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^20.3.0",
+    "@angular/core": "^20.3.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": [
+    "./styles/theme.css",
+    "./styles/icons.css"
+  ],
+  "exports": {
+    "./styles/theme.css": {
+      "default": "./styles/theme.css"
+    },
+    "./styles/icons.css": {
+      "default": "./styles/icons.css"
+    }
+  }
+}

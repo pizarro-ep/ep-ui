@@ -1,0 +1,146 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 content-center">
+                <div class="flex items-center justify-center gap-3 w-full min-h-24 h-full">
+                    <ep-table [headers]="headers"
+                              [variant]="variant ?? 'default'"
+                              [color]="color ?? 'secondary'"
+                              [hoverColor]="hoverColor"
+                              [size]="size ?? 'md'"
+                              [bordered]="bordered"
+                              [striped]="striped"
+                              [selectable]="selectable"
+                              [hoverable]="hoverable"
+                              [shadow]="shadow"
+                              [headerVisible]="headerVisible ?? true"
+                              [hasPaginator]="hasPaginator"
+                              [itemsPerPage]="itemsPerPage ?? 10"
+                              [(currentPage)]="currentPage"
+                              [items]="items">
+                        @if(slotCaption){
+                        <ng-template epCaption>
+                            Caption de la tabla
+                        </ng-template>
+                        }
+                        @if(slotCol){
+                        <ng-template epColumn="col1"
+                                     let-row="row">
+                            <span class="font-black">EpColumn </span>: {{ row.col1 }}
+                        </ng-template>
+                        }
+                        @if(slotFoot){
+                        <ng-template epFooter
+                                     key="col3">
+                            Total
+                        </ng-template>
+                        }
+                    </ep-table>
+                </div>
+                <div class="flex gap-4 flex-col sm:flex-row">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 content-center">
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [(ngModel)]="variant"
+                                   [items]="mapVariants" />
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [(ngModel)]="color"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Hover Color"
+                                   [(ngModel)]="hoverColor"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Size"
+                                   [(ngModel)]="size"
+                                   [items]="mapSizes" />
+                        <ep-input label="Current Page"
+                                  type="number"
+                                  size="xs"
+                                  [(ngModel)]="currentPage" />
+                        <ep-input label="Items Per Page"
+                                  type="number"
+                                  size="xs"
+                                  [(ngModel)]="itemsPerPage" />
+                        <ep-checkbox label="Bordered"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="bordered" />
+                        <ep-checkbox label="Striped"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="striped" />
+                        <ep-checkbox label="Selectable"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="selectable" />
+                        <ep-checkbox label="Hoverable"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="hoverable" />
+                        <ep-checkbox label="Shadow"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="shadow" />
+                        <ep-checkbox label="Header Visible"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="headerVisible" />
+                        <ep-checkbox label="Paginator"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="hasPaginator" />
+                        <ep-checkbox label="Slot: Caption"
+                                     size="sm"
+                                     [(ngModel)]="slotCaption" />
+                        <ep-checkbox label="Slot: Col"
+                                     size="sm"
+                                     [(ngModel)]="slotCol" />
+                        <ep-checkbox label="Slot: Foot"
+                                     size="sm"
+                                     [(ngModel)]="slotFoot" />
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>
+
+<div epDivider="opacity-20"></div>
+
+<div class="grid gap-3">
+    <div class="grid">
+        <span epText="color-primary weight-semibold size-2xl">
+            Interfaces
+        </span>
+        <span epText="color-subtitle size-md">
+            A continuación se muestra las interfaces disponibles para &lt;ep-table&gt;
+        </span>
+    </div>
+    <ep-card variant="tonal">
+        <ng-template epContent>
+            <div class="grid">
+                <pre
+                     class="overflow-x-auto"><code class="text-ep-xs leading-0 whitespace-pre">{{ interfaces }}</code></pre>
+            </div>
+        </ng-template>
+    </ep-card>
+</div>

@@ -1,0 +1,88 @@
+@import 'material-symbols';
+
+.material-symbols,
+.material-symbols-outlined,
+.material-symbols-rounded,
+.material-symbols-sharp,
+.material-symbols-two-tone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-size: inherit !important;
+}
+
+/* 12px */
+.icon-size-3xs {
+    font-size: 0.75rem;
+}
+
+/* 14px */
+.icon-size-2xs {
+    font-size: 0.875rem;
+}
+
+/* 16px */
+.icon-size-xs {
+    font-size: 1rem;
+}
+
+/* 20px */
+.icon-size-sm {
+    font-size: 1.25rem;
+}
+
+/* 24px */
+.icon-size-md {
+    font-size: 1.5rem;
+}
+
+/* 32px */
+.icon-size-lg {
+    font-size: 2rem;
+}
+
+/* 40px */
+.icon-size-xl {
+    font-size: 2.5rem;
+}
+
+/* 48px */
+.icon-size-2xl {
+    font-size: 3rem;
+}
+
+/* 56px */
+.icon-size-3xl {
+    font-size: 3.5rem;
+}
+
+/* 64px */
+.icon-size-4xl {
+    font-size: 4rem;
+}
+
+/* 80px */
+.icon-size-5xl {
+    font-size: 5rem;
+}
+
+/* 96px */
+.icon-size-6xl {
+    font-size: 6rem;
+}
+
+/* 112px */
+.icon-size-7xl {
+    font-size: 7rem;
+}
+
+/* 128px */
+.icon-size-8xl {
+    font-size: 8rem;
+}
+
+/* 144px */
+.icon-size-9xl {
+    font-size: 9rem;
+}

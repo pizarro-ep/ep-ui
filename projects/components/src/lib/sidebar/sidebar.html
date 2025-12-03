@@ -1,0 +1,11 @@
+@if (headerComponent) {
+<ng-content select="ep-sidebar-header"></ng-content>
+}
+
+@if(contentComponent){
+<ng-content select="ep-sidebar-content"></ng-content>
+}
+
+@if (footerComponent){
+<ng-content select="ep-sidebar-footer"></ng-content>
+}

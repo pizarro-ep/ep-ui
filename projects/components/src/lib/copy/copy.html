@@ -1,0 +1,13 @@
+<ep-button type="button"
+           (click)="copyToClipboard()"
+           variant="plain"
+           [color]="color"
+           [size]="size"
+           [disabled]="!text"
+           [prependIcon]="copied ? 'check' : 'content_copy'">
+    <ng-template epContent>
+        <span class="capitalize">
+            {{ copied ? "Copiado" : label }}
+        </span>
+    </ng-template>
+</ep-button>

@@ -1,0 +1,23 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid justify-center">
+                <div class="flex gap-2 items-center">
+                    <span>Title</span>
+                    <ep-switch [(ngModel)]="type"
+                               variant="inset" />
+                    <span>SubTitle</span>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

@@ -1,0 +1,146 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-3">
+                <div class="flex w-full h-full items-center justify-center min-h-24">
+                    <ep-button (click)="show = true"
+                               value="ABRIR MODAL" />
+                    <ep-modal [(show)]="show"
+                              [label]="label"
+                              [subLabel]="subLabel"
+                              [variant]="variant ?? 'static'"
+                              [type]="type ?? 'alert'"
+                              [icon]="icon ?? 'success'"
+                              [confirmButtonShow]="confirmButtonShow ?? true"
+                              [confirmButtonText]="confirmButtonText ?? 'Aceptar'"
+                              [confirmButtonColor]="confirmButtonColor ?? 'primary'"
+                              [denyButtonShow]="denyButtonShow"
+                              [denyButtonText]="denyButtonText ?? 'Cancelar'"
+                              [denyButtonColor]="denyButtonColor ?? 'error'"
+                              [cancelButtonShow]="cancelButtonShow ?? false"
+                              [cancelButtonText]="cancelButtonText ?? 'Cancelar'"
+                              [cancelButtonColor]="cancelButtonColor ?? 'secondary'">
+                        @if(slotContent){
+                        <ng-template epContent>
+                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+                        </ng-template>
+                        }
+                        @if(slotActions){
+                        <ng-template epActions>
+                            <ep-button value="ACTION BUTTON"></ep-button>
+                        </ng-template>
+                        }
+                    </ep-modal>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 items-center">
+                        <ep-input size="xs"
+                                  label="Label"
+                                  [(ngModel)]="label"></ep-input>
+                        <ep-input size="xs"
+                                  label="Sub Label"
+                                  [disabled]="!!slotContent"
+                                  [(ngModel)]="subLabel"></ep-input>
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [items]="mapVariants"
+                                   [(ngModel)]="variant"></ep-select>
+                        <ep-select size="xs"
+                                   label="Type"
+                                   [items]="mapTypes"
+                                   [(ngModel)]="type"></ep-select>
+                        <ep-select size="xs"
+                                   label="Icon"
+                                   [items]="mapIcons"
+                                   [(ngModel)]="icon"></ep-select>
+                        <div epDivider="opacity-20"
+                             class="col-span-2 mb-2"></div>
+                        <ep-checkbox size="xs"
+                                     label="Confirm Button"
+                                     [disabled]="!!slotActions"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="confirmButtonShow"></ep-checkbox>
+                        <ep-checkbox size="xs"
+                                     label="Event: onConfirm"
+                                     [disabled]="(confirmButtonShow !== undefined && !confirmButtonShow) || !!slotActions"
+                                     [(ngModel)]="onConfirm"></ep-checkbox>
+                        <ep-input size="xs"
+                                  label="Confirm Button Label"
+                                  [disabled]="(confirmButtonShow !== undefined && !confirmButtonShow) || !!slotActions"
+                                  [(ngModel)]="confirmButtonText"></ep-input>
+                        <ep-select size="xs"
+                                   label="Confirm Button Color"
+                                   [items]="mapColors"
+                                   [disabled]="(confirmButtonShow !== undefined && !confirmButtonShow) || !!slotActions"
+                                   [(ngModel)]="confirmButtonColor"></ep-select>
+                        <div epDivider="opacity-20"
+                             class="col-span-2 mb-2"></div>
+                        <ep-checkbox size="xs"
+                                     label="Deny Button"
+                                     [disabled]="!!slotActions"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="denyButtonShow"></ep-checkbox>
+                        <ep-checkbox size="xs"
+                                     label="Event: onDeny"
+                                     [disabled]="!denyButtonShow || !!slotActions"
+                                     [(ngModel)]="onDeny"></ep-checkbox>
+                        <ep-input size="xs"
+                                  label="Deny Button Label"
+                                  [disabled]="!denyButtonShow || !!slotActions"
+                                  [(ngModel)]="denyButtonText"></ep-input>
+                        <ep-select size="xs"
+                                   label="Deny Button Color"
+                                   [items]="mapColors"
+                                   [disabled]="!denyButtonShow || !!slotActions"
+                                   [(ngModel)]="denyButtonColor"></ep-select>
+                        <div epDivider="opacity-20"
+                             class="col-span-2 mb-2"></div>
+                        <ep-checkbox size="xs"
+                                     label="Cancel Button"
+                                     [indeterminate]="true"
+                                     [disabled]="!!slotActions"
+                                     [(ngModel)]="cancelButtonShow"></ep-checkbox>
+                        <ep-checkbox size="xs"
+                                     label="Event: onCancel"
+                                     [disabled]="!cancelButtonShow || !!slotActions"
+                                     [(ngModel)]="onCancel"></ep-checkbox>
+                        <ep-input size="xs"
+                                  label="Cancel Button Label"
+                                  [disabled]="!cancelButtonShow || !!slotActions"
+                                  [(ngModel)]="cancelButtonText"></ep-input>
+                        <ep-select size="xs"
+                                   label="Cancel Button Color"
+                                   [items]="mapColors"
+                                   [disabled]="!cancelButtonShow || !!slotActions"
+                                   [(ngModel)]="cancelButtonColor"></ep-select>
+                        <div epDivider="opacity-20"
+                             class="col-span-2 mb-2"></div>
+                        <ep-checkbox size="xs"
+                                     label="Slot: Content"
+                                     [(ngModel)]="slotContent"></ep-checkbox>
+                        <ep-checkbox size="xs"
+                                     label="Slot: Actions"
+                                     [(ngModel)]="slotActions"></ep-checkbox>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

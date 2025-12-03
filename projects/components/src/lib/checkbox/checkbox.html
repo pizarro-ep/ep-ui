@@ -1,0 +1,42 @@
+<div class="flex items-center gap-2"
+     [ngClass]="hostContainerClass"
+     [class.w-full]="block"
+     [class.opacity-50]="isDisabled()"
+     [class.opacity-75]="readonly && !isDisabled()"
+     [class.pointer-events-none]="readonly || isDisabled()">
+       <input [id]="id"
+              type="checkbox"
+              [checked]="value"
+              [disabled]="isDisabled()"
+              [indeterminate]="indeterminate"
+              (change)="onInputChange()"
+              class="peer appearance-none
+                   relative flex-none
+                   before:absolute before:inset-0
+                   before:flex before:items-center before:justify-center
+                   before:ps-0.5 indeterminate:before:pb-0.5 checked:before:pb-0
+                   ring-0 outline-none
+                   border-2
+                   transition-colors duration-200 ease-in-out
+                   before:font-bold
+                   checked:before:content-['✔']
+                   indeterminate:before:content-['\2014']
+                   focus:brightness-50 dark:focus:brightness-150"
+              [ngClass]="checkboxClass()">
+
+       @if(contentTpl || label || variant() === 'advanced'){
+       <label [for]="id"
+              class="w-full font-medium"
+              [ngClass]="labelClass()">
+
+              @if(contentTpl){
+              <ng-container [ngTemplateOutlet]="contentTpl.template"></ng-container>
+              }@else if (label) {
+              {{label}}
+              }@else if(variant() === 'advanced'){
+              Ep Checkbox
+              }
+
+       </label>
+       }
+</div>

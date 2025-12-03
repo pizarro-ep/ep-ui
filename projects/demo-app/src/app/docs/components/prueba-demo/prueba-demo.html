@@ -1,0 +1,12 @@
+<div>HOLA</div>
+
+<div class="grid gap-2">
+    <form [formGroup]="form2">
+        <ep-input formControlName="prueba"
+                  label="prueba"></ep-input>
+    </form>
+    {{ form2.get('prueba')?.value }}
+    <ep-input [(ngModel)]="prueba2"
+              label="prueba"></ep-input>
+    {{ prueba2}}
+</div>

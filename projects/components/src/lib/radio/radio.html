@@ -1,0 +1,45 @@
+<input [id]="id"
+       [name]="name"
+       type="radio"
+       [checked]="value"
+       [disabled]="disabled"
+       (change)="onInputChange()"
+       class="peer appearance-none
+            relative flex-none
+            before:absolute before:inset-0
+            before:flex before:items-center before:justify-center 
+            before:ps-0.5 checked:before:pb-0
+            ring-0 outline-none
+            border-2
+            transition-colors duration-200 ease-in-out
+            before:font-bold 
+            disabled:bg-ep-secondary/20 dark:disabled:bg-ep-secondary-dark/20
+            disabled:border-ep-secondary/50 dark:disabled:border-ep-secondary-dark/50
+            disabled:checked:before:text-ep-secondary dark:disabled:checked:before:text-ep-secondary-dark
+            checked:before:content-['✔'] 
+            focus:brightness-50 dark:focus:brightness-150
+            disabled:pointer-events-none
+            disabled:opacity-50"
+       [ngClass]="radioClass()"
+       [class.opacity]="readonly"
+       [class.pointer-events-none]="readonly">
+
+@if(contentTpl || label || variant() === 'advanced'){
+<label [for]="id"
+       class="w-full font-medium 
+              peer-disabled:text-ep-secondary/75 dark:peer-disabled:text-ep-secondary-dark/75 
+              peer-disabled:opacity-50 peer-disabled:pointer-events-none"
+       [ngClass]="labelClass()"
+       [class.opacity]="readonly"
+       [class.pointer-events-none]="readonly">
+
+       @if(contentTpl){
+       <ng-container [ngTemplateOutlet]="contentTpl.template"></ng-container>
+       }@else if (label) {
+       {{label}}
+       }@else if(variant() === 'advanced'){
+       Ep Radio
+       }
+
+</label>
+}

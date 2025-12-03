@@ -1,0 +1,34 @@
+@if(allowed){
+<ng-container>
+    <ul class="flex flex-col w-full transition-all duration-300 ease-in-out overflow-hidden"
+        [ngClass]="listClass()">
+        @if (!isProjection) {
+        @for (item of items; track $index) {
+        <ep-list-item [label]="item.label"
+                      [subLabel]="item.subLabel"
+                      [value]="item.value"
+                      [route]="item.route"
+                      [prependIcon]="item.prependIcon"
+                      [appendIcon]="item.appendIcon"
+                      [expandable]="item.expandable"
+                      [expanded]="item.expanded"
+                      [expandedIcon]="item.expandedIcon"
+                      [divider]="item.divider"
+                      [(expanded)]="item.expanded"
+                      [selected]="item.selected"
+                      [disabled]="item.disabled"
+                      (onItemClick)="emitItemClick(item)">
+            @if (item.children) {
+            <ep-list [items]="item.children"
+                     (onItemClick)="emitItemClick($event)" />
+            }
+        </ep-list-item>
+        }
+        }
+
+        @if (isProjection) {
+        <ng-content select="ep-list-item"></ng-content>
+        }
+    </ul>
+</ng-container>
+}

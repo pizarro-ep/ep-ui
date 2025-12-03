@@ -1,0 +1,48 @@
+<div class="min-h-screen max-w-full bg-ep-body dark:bg-ep-body-dark">
+    <div class="ps-4 lg:ps-0 pe-4 lg:ml-80">
+        <ep-sidebar>
+            <ep-sidebar-header color="primary"
+                               size="xl"
+                               label="EP COMPONENTS"
+                               subLabel="Zero.ep">
+                <ng-template epPrepend>LOGO</ng-template>
+            </ep-sidebar-header>
+            <ep-sidebar-content [gap]="{g:1}"
+                                [padding]="{px:3}"
+                                rounded="md"
+                                [menuItems]="menuItems">
+            </ep-sidebar-content>
+            <ep-sidebar-footer epText="color-subtitle weight-semibold size-xs">
+                <div epDivider="opacity-10"></div>
+                © Pizarro Ep. 2025
+            </ep-sidebar-footer>
+        </ep-sidebar>
+        <div class="sticky top-0 pt-3 pb-1 z-20 bg-ep-body dark:bg-ep-body-dark">
+            <ep-appbar>
+                <ep-appbar-header label="EP COMPONENTS"
+                                  size="lg"
+                                  [hasMenu]="true">
+                    <ng-template epAppend>
+                        <ep-button type="icon"
+                                   color="secondary"
+                                   variant="plain"
+                                   [epTooltip]="theme.isDarkMode() ? 'Light Mode' : 'Dark Mode'"
+                                   [icon]="theme.isDarkMode() ? 'mode_night' : 'light_mode'"
+                                   (click)="theme.toggleTheme()">
+                        </ep-button>
+                    </ng-template>
+                </ep-appbar-header>
+                <ep-appbar-menu [items]="menuItems" />
+            </ep-appbar>
+        </div>
+        <div class="block py-3">
+            <div epContainer
+                 rounded="lg"
+                 class="grid gap-4">
+                <router-outlet class="contents" />
+            </div>
+        </div>
+        <div class="text-blue-gray-600 py-3">
+        </div>
+    </div>
+</div>

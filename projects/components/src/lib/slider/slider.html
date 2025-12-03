@@ -1,0 +1,133 @@
+@if(topLabel){
+<label [for]="id"
+       class="inline-flex items-center flex-none truncate text-ellipsis max-w-full"
+       [ngClass]="labelClass()">
+    {{ topLabel }}
+</label>
+}
+<div class="flex gap-2 items-center w-full">
+    @if(label()){
+    <label [for]="id"
+           class="inline-flex items-center truncate text-ellipsis flex-none max-w-20"
+           [ngClass]="labelClass()">
+        {{ label() }}
+    </label>
+    } @if(prependIcon){
+    <div class="inline-flex items-center shrink-0"
+         [ngClass]="iconClass()">
+        <ep-icon [icon]="prependIcon"
+                 [size]="size()" />
+    </div>
+    }
+    <div class="relative min-w-12 w-full group"
+         [ngClass]="containerClass()">
+        <!-- Barra base -->
+        <div class="absolute flex items-center w-full h-full">
+            <div [ngClass]="trackUnderClass()"></div>
+        </div>
+        <!-- Barra activa -->
+        <div class="absolute flex items-center w-full h-full">
+            <div [ngClass]="trackOverClass()"
+                 [style.width.px]="thumbPosition()"></div>
+        </div>
+        <!-- Tooltip -->
+        @if(tooltip){
+        <div class="absolute z-50 -translate-x-1/2 -top-8
+                    after:absolute after:top-full after:left-1/2
+                    after:-translate-x-1/2
+                    px-2 py-1
+                    rounded
+                    bg-ep-secondary dark:bg-ep-secondary-dark
+                    text-white dark:text-white text-ep-xs
+                    after:border-4 after:border-transparent
+                    after:border-t-ep-secondary dark:border-t-ep-secondary-dark
+                    shadow-md
+                    whitespace-nowrap
+                    content-['']
+                    opacity-0 group-hover:opacity-100"
+             [style.left.px]="thumbPosition()">
+            {{ value() }}
+        </div>
+        }
+        <!-- Slider -->
+        <div class="absolute flex items-center w-full h-full">
+            <input #slider
+                   type="range"
+                   [id]="id"
+                   [step]="_step()"
+                   [min]="_min()"
+                   [max]="_max()"
+                   [value]="value()"
+                   (input)="onInput($event);"
+                   (blur)="onTouched()"
+                   [disabled]="disabled()"
+                   class="relative w-full h-full
+                          appearance-none
+                          [&::-webkit-slider-thumb]:appearance-none
+                          bg-transparent dark:bg-transparent
+                          hover:[&::-moz-range-thumb]:brightness-90 
+                          dark:hover:[&::-moz-range-thumb]:brightness-110 
+                          hover:[&::-webkit-slider-thumb]:brightness-90 
+                          dark:hover:[&::-webkit-slider-thumb]:brightness-110
+                          disabled:[&::-moz-range-thumb]:brightness-125
+                          dark:disabled:[&::-moz-range-thumb]:brightness-75
+                          disabled:[&::-webkit-slider-thumb]:bg-ep-secondary
+                          dark:disabled:[&::-webkit-slider-thumb]:bg-ep-secondary-dark
+                          disabled:[&::-moz-range-thumb]:bg-ep-secondary
+                          dark:disabled:[&::-moz-range-thumb]:bg-ep-secondary-dark
+                          disabled:accent-ep-secondary dark:disabled:accent-ep-secondary-dark
+                          [&::-webkit-slider-thumb]:border-0 
+                          [&::-moz-range-thumb]:border-0
+                          [&::-webkit-slider-thumb]:rounded-full
+                          [&::-moz-range-thumb]:rounded-full
+                          [&::-webkit-slider-thumb]:shadow-md
+                          [&::-moz-range-thumb]:shadow-md
+                          [&::-webkit-slider-thumb]:origin-center
+                          [&::-moz-range-thumb]:origin-center
+                          [&::-webkit-slider-thumb]:scale-110
+                          [&::-moz-range-thumb]:scale-110
+                          cursor-pointer 
+                          disabled:pointer-events-none"
+                   [ngClass]="inputClass()" />
+        </div>
+    </div>
+    @if(appendIcon){
+    <div class="inline-flex items-center shrink-0"
+         [ngClass]="iconClass()">
+        <ep-icon [icon]="appendIcon"
+                 [size]="size()" />
+    </div>
+    }
+</div>
+@if(hasMinMaxLabel){
+<div class="flex gap-2 items-center truncate text-ellipsis">
+    @if(label()){
+    <label [for]="id"
+           class="inline-flex items-center truncate text-ellipsis flex-none max-w-20"
+           [ngClass]="labelClass()"
+           [class.invisible]="true">
+        {{ label() }}
+    </label>
+    }
+    @if(prependIcon){
+    <div class="inline-flex items-center shrink-0"
+         [ngClass]="iconClass()"
+         [class.invisible]="true">
+        <ep-icon [icon]="prependIcon"
+                 [size]="size()" />
+    </div>
+    }
+    <div class="flex w-full justify-between select-none">
+        <span epText="color-subtitle size-xs">{{ _min() }}</span>
+        <span epText="color-subtitle size-xs">{{ _max() }}</span>
+    </div>
+    @if(appendIcon){
+    <div class="inline-flex items-center shrink-0"
+         [ngClass]="iconClass()"
+         [class.invisible]="true">
+        <ep-icon [icon]="appendIcon"
+                 [size]="size()" />
+    </div>
+    }
+</div>
+}

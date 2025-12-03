@@ -1,0 +1,173 @@
+<div class="flex gap-1 items-center flex-nowrap group w-full"
+	 [class.pointer-events-none]="isDisabled() || readonly"
+	 [class.opacity-75]="!isDisabled() && readonly"
+	 [class.opacity-50]="isDisabled()">
+
+	@if(prependIcon){
+	<ep-icon [icon]="prependIcon"
+			 [color]="color()"
+			 [size]="size()" />
+	}
+
+	<div class="flex items-stretch gap-1.5 truncate w-full"
+		 [ngClass]="containerClass()">
+
+		@if(type() === 'number'){
+		<div class="flex px-1 items-center brightness-50 dark:brightness-125 cursor-pointer"
+			 [ngClass]="numberIconClass()"
+			 [class.border-r]="variant()==='outlined'"
+			 (click)="decrement()">
+			<ep-icon icon="remove"
+					 [color]="color()"
+					 [size]="size()" />
+		</div>
+		}
+
+		<div class="flex items-stretch gap-1.5 w-full truncate
+			 group-focus-within:brightness-[1.15] dark:group-focus-within:brightness-[1.15]">
+
+			@if(prependInnerIcon()){
+			<div class="flex items-center gap-1">
+				<ep-icon [icon]="prependInnerIcon()"
+						 [color]="color()"
+						 [size]="size()" />
+			</div>
+			}
+
+			<div class="relative w-full"
+				 [ngClass]="fieldContainerClass()">
+
+				<input [id]="id"
+					   [type]="type() === 'number' ? 'text' : type()"
+					   [value]="value"
+					   [attr.disabled]="isDisabled() ? true : null"
+					   [readonly]="readonly"
+					   [attr.placeholder]="placeholderText()"
+					   (input)="handleInput($event)"
+					   (blur)="onBlur()"
+					   [epNumber]="type() === 'number'"
+					   [attr.minlength]="minLength"
+					   [attr.maxlength]="maxLength"
+					   [attr.step]="type() === 'number' ? step : null"
+					   class="peer appearance-none
+							box-border
+							w-full h-full
+							font-semibold
+							placeholder:font-normal
+							disabled:text-ep-secondary/75 
+							dark:disabled:text-ep-secondary-dark/75
+							disabled:placeholder:text-ep-secondary/75 
+							dark:disabled:placeholder:text-ep-secondary-dark/75
+							focus:ring-0
+							focus:outline-none
+							read-only:opacity-75
+							disabled:opacity-50
+							read-only:pointer-events-none
+							disabled:pointer-events-none"
+					   [ngClass]="inputClass()"
+					   [class.pt-1]="label()"
+					   [class.text-center]="type()=== 'number'" />
+
+				@if(label()){
+				<label [for]="id"
+					   class="absolute z-10 top-0 inset-0 start-0
+							rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4
+							peer-placeholder-shown:translate-y-0
+							flex items-center
+							w-full max-w-full h-full
+							transition-all duration-300 ease-in-out
+							text-left whitespace-nowrap 
+							peer-focus:brightness-50
+							dark:peer-focus:brightness-125
+							peer-disabled:text-ep-secondary/75
+							dark:peer-disabled:text-ep-secondary-dark/75
+							overflow-hidden
+							cursor-text
+							peer-disabled:opacity-50
+							peer-read-only:opacity-75
+							peer-disabled:pointer-events-none
+							peer-read-only:pointer-events-none
+							pointer-events-none"
+					   [ngClass]="labelClass()">
+					<span class="truncate w-full block">
+						{{label()}}
+					</span>
+				</label>
+				}
+			</div>
+
+			@if(appendInnerIcon() || clearable() || hasErrorIcon()){
+			<div class="flex items-center gap-1 px-1">
+				@if(clearable() && value){
+				<ep-button type="icon"
+						   size="sm"
+						   variant="tonal"
+						   color="secondary"
+						   rounded="full"
+						   icon="close"
+						   (click)="clearInput()"
+						   [disabled]="isDisabled() || readonly">
+				</ep-button>
+				}
+
+				@if(hasErrorIcon() && invalid && errorMessage){
+				<ep-icon icon="error"
+						 color="error"
+						 [size]="size()" />
+				}@else if(hasErrorIcon() && !errorMessage) {
+				<ep-icon icon="check_circle"
+						 color="success"
+						 [size]="size()" />
+				}
+
+				@if(appendInnerIcon()){
+				<ep-icon [icon]="appendInnerIcon()"
+						 [color]="color()"
+						 [size]="size()" />
+				}
+			</div>
+			}
+
+		</div>
+
+		@if(type() === 'number'){
+		<div class="flex px-1 items-center brightness-50 dark:brightness-125 cursor-pointer"
+			 [ngClass]="numberIconClass()"
+			 [class.border-l]="variant()==='outlined'"
+			 (click)="increment()">
+			<ep-icon icon="add"
+					 [color]="color()"
+					 [size]="size()" />
+		</div>
+		}
+
+	</div>
+
+	@if(appendIcon){
+	<ep-icon [icon]="appendIcon"
+			 [size]="size()"
+			 [color]="color()" />
+	}
+
+</div>
+
+@if(hasErrorMessage){
+<div class="flex gap-1 truncate h-6">
+	@if(prependIcon){
+	<ep-icon [size]="size()"
+			 [color]="color()"
+			 class="invisible" />
+	}
+	<div class="w-full h-6 text-ep-xs text-left leading-none text-ep-error dark:text-ep-error-dark">
+		@if(invalid && errorMessage){
+		{{errorMessage}}
+		}
+	</div>
+	@if(appendIcon){
+	<ep-icon [size]="size()"
+			 [color]="color()"
+			 class="invisible" />
+	}
+</div>
+
+}

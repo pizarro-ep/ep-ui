@@ -1,0 +1,51 @@
+<ep-input [(ngModel)]="displayLabel"
+          type="text"
+          [variant]="variant"
+          [color]="color()"
+          [size]="size()"
+          [rounded]="rounded()"
+          [label]="label"
+          [placeholder]="placeholder"
+          [disabled]="!!disabled"
+          [readonly]="readonly"
+          [appendIcon]="appendIcon"
+          [prependIcon]="prependIcon"
+          [prependInnerIcon]="prependInnerIcon"
+          [appendInnerIcon]="appendInnerIcon ?? 'arrow_drop_down'"
+          [block]="true"
+          [hasErrorIcon]="hasErrorIcon"
+          [hasErrorMessage]="hasErrorMessage"
+          (click)="toggleDropdown()"
+          class="[&_*]:pointer-events-none hover:brightness-75 dark:hover:brightness-125" />
+
+@if(isOpen() && !disabled){
+<div #selectPanel
+     class="absolute z-20 origin-top
+            inline-block space-y-1
+            p-1.5 mt-1 mb-1
+            w-full min-w-20
+            min-h-4 max-h-64
+            overflow-y-auto overflow-x-hidden
+            bg-white dark:bg-ep-gray-dark
+            border border-ep-border dark:border-ep-border-dark
+            shadow-ep-lg
+            transition-all duration-300 ease-in-out
+            opacity-100 starting:opacity-0
+            scale-100 starting:scale-0"
+     [ngClass]="panelClass()">
+    <div class="grid w-full gap-0.5">
+        @if(hasProyectionItem){
+        <ng-content select="ep-select-item"></ng-content>
+        }@else {
+        @for(item of items; track $index){
+        <ep-select-item [label]="item.label"
+                        [subLabel]="item.subLabel"
+                        [value]="item.value ?? item.label"
+                        [prependIcon]="item.prependIcon"
+                        [appendIcon]="item.appendIcon"
+                        (onItemClick)="itemSelected($event)" />
+        }
+        }
+    </div>
+</div>
+}

@@ -1,0 +1,21 @@
+<span [ngClass]="labelClass()"
+      class="text-nowrap text-ep-subtitle dark:text-ep-subtitle-dark">
+  Mostrar
+</span>
+
+<div class="inline-flex items-center"
+     [ngClass]="containerClass()">
+  <ep-select [(ngModel)]="value"
+             (valueChange)="changeLimitValue($event)"
+             [size]="size()"
+             [rounded]="rounded"
+             [color]="color"
+             [variant]="variant"
+             [items]="avaliableLimits">
+  </ep-select>
+</div>
+
+<span [ngClass]="labelClass()"
+      class="text-nowrap text-ep-subtitle dark:text-ep-subtitle-dark">
+  entradas
+</span>

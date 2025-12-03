@@ -1,0 +1,34 @@
+<div class="flex justify-between items-center space-x-2 w-full cursor-pointer"
+     [ngClass]="itemClass()"
+     (click)="emitClickEvent()">
+    <!-- Izquierda -->
+    <div class="flex flex-1 items-center gap-2">
+        @if(prependIcon) {
+        <ep-icon [icon]="prependIcon"
+                 [size]="_size()" />
+        }
+        <ng-container *ngTemplateOutlet="prependTpl?.template"></ng-container>
+        <div class="flex flex-1 flex-col gap-0.5">
+            <span class="leading-none text-left font-semibold origin-left select-none"
+                  [ngClass]="labelClass()">
+                {{ label }}
+            </span>
+            @if(subLabel) {
+            <span class="leading-none text-left font-normal origin-left select-none opacity-95"
+                  [ngClass]="subLabelClass()">
+                {{ subLabel }}
+            </span>
+            }
+        </div>
+    </div>
+    <!-- Derecha -->
+    @if(appendTpl || appendIcon){
+    <div class="flex flex-none items-center gap-2">
+        <ng-container *ngTemplateOutlet="appendTpl?.template"></ng-container>
+        @if(appendIcon) {
+        <ep-icon [icon]="appendIcon"
+                 [size]="_size()" />
+        }
+    </div>
+    }
+</div>

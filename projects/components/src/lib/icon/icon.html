@@ -1,0 +1,19 @@
+<div class="inline-flex items-center justify-center shrink-0 leading-none truncate w-[1em] h-[1em] select-none"
+     [ngClass]="iconContainerClass()">
+    @if(_icon()){
+    <span [ngClass]="iconClass()">{{_icon()}}</span>
+    }@else {
+    <ng-content select="svg">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             class="w-full h-full">
+            <polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5 12 2" />
+        </svg>
+    </ng-content>
+    }
+</div>

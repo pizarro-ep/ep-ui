@@ -1,0 +1,148 @@
+<div class="flex items-stretch gap-1 group w-full"
+     [class.pointer-events-none]="isDisabled() || readonly"
+     [class.opacity-75]="!isDisabled() && readonly"
+     [class.opacity-50]="isDisabled()">
+
+    @if(prependIcon){
+    <div class="flex items-start"
+         [ngClass]="outerIconClass()">
+        <ep-icon [icon]="prependIcon"
+                 [color]="color()"
+                 [size]="size()" />
+    </div>
+    }
+
+    <div class="flex w-full items-stretch gap-1.5 truncate group-focus-within:brightness-[1.15] dark:group-focus-within:brightness-[1.15]"
+         [ngClass]="containerClass()">
+
+        @if(prependInnerIcon()){
+        <div class="flex items-start">
+            <div class="flex items-center gap-1">
+                <ep-icon [icon]="prependInnerIcon()"
+                         [color]="color()"
+                         [size]="size()"
+                         [ngClass]="innerIconClass()" />
+            </div>
+        </div>
+        }
+
+        <div class="relative w-full"
+             [ngClass]="fieldContainerClass()">
+            <textarea #textarea
+                      [id]="id"
+                      [value]="value"
+                      [attr.disabled]="isDisabled() ? true : null"
+                      [readonly]="readonly"
+                      [attr.placeholder]="placeholderText()"
+                      [attr.maxlength]="_max()"
+                      [attr.minlength]="_min()"
+                      (input)="handleInput($event)"
+                      (blur)="onTouched()"
+                      [rows]="rows"
+                      class="peer appearance-none
+                                box-border
+                                align-top
+                                w-full h-full
+                                font-semibold
+                                leading-tight
+                                placeholder:font-normal
+                                disabled:text-ep-secondary/75
+                                dark:disabled:text-ep-secondary-dark/75
+                                disabled:placeholder:text-ep-secondary/75
+                                dark:disabled:placeholder:text-ep-secondary-dark/75
+                                focus:ring-0
+                                focus:outline-none
+                                read-only:pointer-events-none
+                                disabled:pointer-events-none"
+                      [ngClass]="textareaClass()"
+                      [class.resize-none]="!resize">
+                </textarea>
+            @if(label()){
+            <label [for]="id"
+                   class="absolute z-10 top-0 inset-0 start-0
+                            rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4
+                            peer-placeholder-shown:translate-y-0
+                            flex items-start
+                            w-full h-full
+                            py-0.5
+                            transition-all duration-300 ease-in-out
+                            text-ellipsis text-left
+                            leading-none
+                            truncate whitespace-nowrap
+                            peer-focus:brightness-50
+                            dark:peer-focus:brightness-125
+                            peer-disabled:text-ep-secondary/75
+                            dark:peer-disabled:text-ep-secondary-dark/75
+                            overflow-hidden
+                            cursor-text
+                            peer-disabled:opacity-50
+                            peer-read-only:opacity-75
+                            peer-disabled:pointer-events-none
+                            peer-read-only:pointer-events-none
+                            pointer-events-none"
+                   [ngClass]="labelClass()">
+                <span class="truncate w-full block">
+                    {{label()}}
+                </span>
+            </label>
+            }
+        </div>
+
+        @if(appendInnerIcon() || clearable() || hasErrorIcon){
+        <div class="flex items-start gap-1">
+            <div class="flex items-center gap-1">
+                @if(clearable() && value){
+                <ep-button type="icon"
+                           size="sm"
+                           variant="tonal"
+                           color="secondary"
+                           rounded="full"
+                           icon="close"
+                           (click)="clearTextarea(textarea)"
+                           [disabled]="isDisabled() || readonly">
+                </ep-button>
+                }
+
+                @if(hasErrorIcon && invalid && errorMessage){
+                <ep-icon icon="error"
+                         color="error"
+                         [size]="size()"
+                         [ngClass]="innerIconClass()" />
+                }@else if(hasErrorIcon && !errorMessage) {
+                <ep-icon icon="check_circle"
+                         color="success"
+                         [size]="size()"
+                         [ngClass]="innerIconClass()" />
+                }
+
+                @if(appendInnerIcon()){
+                <ep-icon [icon]="appendInnerIcon()"
+                         [color]="color()"
+                         [size]="size()"
+                         [ngClass]="innerIconClass()" />
+                }
+            </div>
+        </div>
+        }
+    </div>
+
+    @if(appendIcon){
+    <div class="flex items-start px-1"
+         [ngClass]="outerIconClass()">
+        <ep-icon [icon]="appendIcon"
+                 [size]="size()"
+                 [color]="color()" />
+    </div>
+    }
+
+</div>
+
+@if(hasErrorMessage){
+<div class="w-full h-6 text-ep-xs text-left leading-none text-ep-error dark:text-ep-error-dark">
+
+    @if(invalid && errorMessage){
+    {{errorMessage}}
+    }
+
+</div>
+}

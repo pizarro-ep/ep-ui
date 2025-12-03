@@ -1,0 +1,94 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-3">
+                <div class="flex w-full h-full items-center justify-center min-h-24">
+                    <ep-chip [label]="label"
+                             [variant]="variant ?? 'tonal'"
+                             [color]="color ?? 'primary'"
+                             [size]="size ?? 'md'"
+                             [rounded]="rounded ?? 'full'"
+                             [visible]="visible ?? true"
+                             [closable]="closable"
+                             [hoverable]="hoverable"
+                             [disabled]="disabled"
+                             [prependIcon]="prependIcon ? 'star' : undefined"
+                             [appendIcon]="appendIcon ? 'star' : undefined">
+                        @if(slotContent){
+                        <ng-template epContent>
+                            <span>CONTENT PROJECTION</span>
+                        </ng-template>
+                        }
+                    </ep-chip>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 items-center">
+                        <ep-input size="xs"
+                                  label="Label"
+                                  [disabled]="!!slotContent"
+                                  [(ngModel)]="label" />
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [(ngModel)]="variant"
+                                   [items]="mapVariants" />
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [(ngModel)]="color"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Size"
+                                   [(ngModel)]="size"
+                                   [items]="mapSizes" />
+                        <ep-select size="xs"
+                                   label="Rounded"
+                                   [(ngModel)]="rounded"
+                                   [items]="mapRoundeds" />
+                        <div></div>
+                        <ep-checkbox label="Visible"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="visible" />
+                        <ep-checkbox label="Closable"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="closable" />
+                        <ep-checkbox label="Hoverable"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="hoverable" />
+                        <ep-checkbox label="Disabled"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="disabled" />
+                        <ep-checkbox label="Prepend Icon"
+                                     size="sm"
+                                     [(ngModel)]="prependIcon" />
+                        <ep-checkbox label="Append Icon"
+                                     size="sm"
+                                     [(ngModel)]="appendIcon" />
+                        <ep-checkbox label="Slot: Content"
+                                     size="sm"
+                                     [(ngModel)]="slotContent" />
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

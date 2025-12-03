@@ -1,0 +1,25 @@
+<!-- Caso 1: Slot activator -->
+@if(activatorSlot){
+<ng-container *ngTemplateOutlet="activatorSlot.template; context: { toggle: toggle.bind(this) }">
+</ng-container>
+}
+
+<!-- Contenido del menú -->
+@if(isOpen()){
+<div #menuContent
+     class="absolute z-50 space-y-1 p-1
+            min-w-12 max-w-64 w-max
+            min-h-12 max-h-screen
+            overflow-y-auto overflow-x-hidden
+            bg-white dark:bg-ep-gray-dark
+            border border-ep-border dark:border-ep-border-dark
+            rounded-lg shadow-ep-lg
+            transition-all duration-200 ease-in-out
+            opacity-100 starting:opacity-0
+            scale-100 starting:scale-0"
+     [ngClass]="panelClass()">
+    @if(contentSlot){
+    <ng-content select="ep-list[epMenuContent]"></ng-content>
+    }
+</div>
+}

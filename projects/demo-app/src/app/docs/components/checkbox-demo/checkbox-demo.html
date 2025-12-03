@@ -1,0 +1,86 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 content-center">
+                <div class="flex justify-center items-center w-full min-h-24 h-full">
+                    <ep-checkbox [label]="label"
+                                 [variant]="variant ?? 'default'"
+                                 [color]="color ?? 'secondary'"
+                                 [size]="size ?? 'md'"
+                                 [rounded]="rounded ?? 'sm'"
+                                 [containerRounded]="containerRounded ?? 'md'"
+                                 [readonly]="readonly"
+                                 [disabled]="disabled"
+                                 [block]="block">
+                        @if(slotContent){
+                        <ng-template epContent>
+                            Este es el contenido del checkbox
+                        </ng-template>
+                        }
+                    </ep-checkbox>
+                </div>
+                <div class="flex gap-4 flex-col sm:flex-row">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 content-center">
+                        <ep-input size="xs"
+                                  label="ID"
+                                  [(ngModel)]="id" />
+                        <ep-input size="xs"
+                                  label="Label"
+                                  [disabled]="!!slotContent"
+                                  [(ngModel)]="label" />
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [(ngModel)]="variant"
+                                   [items]="mapVariants" />
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [(ngModel)]="color"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Size"
+                                   [(ngModel)]="size"
+                                   [items]="mapSizes" />
+                        <ep-select size="xs"
+                                   label="Rounded"
+                                   [(ngModel)]="rounded"
+                                   [items]="mapRoundeds" />
+                        <ep-select size="xs"
+                                   label="Container Rounded"
+                                   [(ngModel)]="containerRounded"
+                                   [items]="mapRoundeds" />
+                        <div></div>
+                        <ep-checkbox label="Readonly"
+                                     size="sm"
+                                     [(ngModel)]="readonly" />
+                        <ep-checkbox label="Disabled"
+                                     size="sm"
+                                     [(ngModel)]="disabled" />
+                        <ep-checkbox label="Block"
+                                     size="sm"
+                                     [(ngModel)]="block" />
+                        <ep-checkbox label="Slot: Content"
+                                     size="sm"
+                                     [(ngModel)]="slotContent" />
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

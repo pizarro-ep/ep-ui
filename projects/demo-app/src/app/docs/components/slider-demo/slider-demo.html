@@ -1,0 +1,115 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 content-center">
+                <div class="flex items-center justify-center gap-3 w-full min-h-24 h-full">
+                    <ep-slider [label]="label"
+                               [topLabel]="topLabel"
+                               [color]="color ?? 'secondary'"
+                               [trackColor]="trackColor"
+                               [thumbColor]="thumbColor"
+                               [size]="size ?? 'md'"
+                               [readonly]="readonly"
+                               [disabled]="disabled"
+                               [step]="step ?? 1"
+                               [min]="min ?? 0"
+                               [max]="max ?? 100"
+                               [hasMinMaxLabel]="hasMinMaxLabel"
+                               [tooltip]="tooltip"
+                               [readonly]="readonly"
+                               [disabled]="disabled"
+                               [appendIcon]="appendIcon ? 'star' : undefined"
+                               [prependIcon]="prependIcon ? 'star' : undefined"
+                               [block]="block" />
+                </div>
+                <div class="flex gap-4 flex-col sm:flex-row">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 content-center">
+                        <ep-input size="xs"
+                                  label="ID"
+                                  [(ngModel)]="id" />
+                        <ep-input size="xs"
+                                  label="Label"
+                                  [(ngModel)]="label" />
+                        <ep-input size="xs"
+                                  label="Top Label"
+                                  [(ngModel)]="topLabel" />
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [(ngModel)]="color"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Track Color"
+                                   [(ngModel)]="trackColor"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Thumb Color"
+                                   [(ngModel)]="thumbColor"
+                                   [items]="mapColors" />
+                        <ep-select size="xs"
+                                   label="Size"
+                                   [(ngModel)]="size"
+                                   [items]="mapSizes" />
+                        <ep-input type="number"
+                                  size="xs"
+                                  [min]="0"
+                                  label="Step"
+                                  [(ngModel)]="step" />
+                        <ep-input type="number"
+                                  size="xs"
+                                  [min]="0"
+                                  label="Min value"
+                                  [(ngModel)]="min" />
+                        <ep-input type="number"
+                                  size="xs"
+                                  [min]="0"
+                                  label="Max value"
+                                  [(ngModel)]="max" />
+                        <ep-checkbox label="Min Max Label"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="hasMinMaxLabel" />
+                        <ep-checkbox label="Tooltip"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="tooltip" />
+                        <ep-checkbox label="Readonly"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="readonly" />
+                        <ep-checkbox label="Disabled"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="disabled" />
+                        <ep-checkbox label="Prepend Icon"
+                                     size="sm"
+                                     [(ngModel)]="prependIcon" />
+                        <ep-checkbox label="Append Icon"
+                                     size="sm"
+                                     [(ngModel)]="appendIcon" />
+                        <ep-checkbox label="Block"
+                                     size="sm"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="block" />
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

@@ -1,0 +1,67 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-3">
+                <div class="flex w-full h-full items-center justify-center min-h-24">
+                    @if(activatorSlot) {
+                    <ep-menu>
+                        <ng-template epActivator
+                                     let-toggle="toggle">
+                            <ep-button (click)="toggle()"
+                                       value="SLOT ACTIVATOR" />
+                        </ng-template>
+
+                        <ep-list epMenuContent>
+                            <ep-list-item label="Ítem 1"></ep-list-item>
+                            <ep-list-item label="Ítem 2"></ep-list-item>
+                        </ep-list>
+                    </ep-menu>
+                    }@else if(activatorSibling) {
+                    <ep-button id="menu-activator"
+                               value="SIBLING ACTIVATOR" />
+                    <ep-menu activator="#menu-activator">
+                        <ep-list epMenuContent>
+                            <ep-list-item label="Ítem 1"></ep-list-item>
+                            <ep-list-item label="Ítem 2"></ep-list-item>
+                        </ep-list>
+                    </ep-menu>
+                    }
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 items-center">
+                        <ep-input size="xs"
+                                  label="Activator"
+                                  [disabled]="activatorSlot"
+                                  [(ngModel)]="activator"></ep-input>
+                        <div></div>
+                        <ep-checkbox [(ngModel)]="activatorSlot"
+                                     size="sm"
+                                     label="Activator: Slot"
+                                     (ngModelChange)="activatorSibling = !activatorSlot" />
+                        <ep-checkbox [(ngModel)]="activatorSibling"
+                                     size="sm"
+                                     label="Activator: Sibling"
+                                     (ngModelChange)="activatorSlot = !activatorSibling" />
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

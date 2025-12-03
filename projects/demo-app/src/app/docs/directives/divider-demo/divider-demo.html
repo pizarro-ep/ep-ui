@@ -1,0 +1,51 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-3">
+                <div class="flex w-full h-full items-center justify-center min-h-24">
+                    <div [epDivider]="dividerClass"></div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 items-center">
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [(ngModel)]="variant"
+                                   [items]="mapVariants"></ep-select>
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [(ngModel)]="color"
+                                   [items]="mapColors"></ep-select>
+                        <ep-slider size="sm"
+                                   label="Thickness"
+                                   [tooltip]="true"
+                                   [min]="1"
+                                   [max]="20"
+                                   [(ngModel)]="thickness"></ep-slider>
+                        <ep-slider size="sm"
+                                   label="Opacity"
+                                   [tooltip]="true"
+                                   [step]="5"
+                                   [(ngModel)]="opacity"></ep-slider>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions="">
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="codeTemplate"
+                              [codeScript]="codeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>

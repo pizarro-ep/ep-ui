@@ -1,0 +1,30 @@
+<div class="min-h-screen max-w-full bg-ep-body dark:bg-ep-body-dark">
+    <div class="px-4">
+        <div class="sticky top-0 pt-3 pb-1 z-20 bg-ep-body dark:bg-ep-body-dark">
+            <ep-appbar>
+                <ep-appbar-header label="EP COMPONENTS"
+                                  size="lg"
+                                  [hasMenu]="true">
+                    <ng-template epAppend>
+                        <ep-button type="icon"
+                                   color="secondary"
+                                   variant="plain"
+                                   [epTooltip]="theme.isDarkMode() ? 'Light Mode' : 'Dark Mode'"
+                                   [icon]="theme.isDarkMode() ? 'mode_night' : 'light_mode'"
+                                   (click)="theme.toggleTheme()">
+                        </ep-button>
+                    </ng-template>
+                </ep-appbar-header>
+            </ep-appbar>
+        </div>
+        <div class="block py-3">
+            <div epContainer
+                 rounded="lg"
+                 class="grid gap-4">
+                <router-outlet class="contents" />
+            </div>
+        </div>
+        <div class="text-blue-gray-600 py-3">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="overflow-y-auto"
+     [class.shadow-ep-lg]="shadow">
+    <table class="w-full text-left rtl:text-right 
+                  text-ep-subtitle dark:text-ep-subtitle-dark
+                  select-none"
+           [class.border-separate]="variant()==='separated'"
+           [class.border-spacing-y-1]="variant()==='separated'">
+
+        @if(captionTemplate){
+        <caption class="font-semibold text-left rtl:text-right text-ep-title dark:text-ep-title-dark"
+                 [ngClass]="captionClass()">
+            <ng-container [ngTemplateOutlet]="captionTemplate.template"></ng-container>
+        </caption>
+        }
+
+        @if(headerVisible){
+        <thead class="bg-ep-body dark:bg-ep-body-dark font-bold uppercase"
+               [ngClass]="headClass()">
+            <tr>
+                @if(selectable){
+                <th scope="col"
+                    class="text-left w-3"
+                    [ngClass]="headCellClass()">
+                    <div class="flex items-center justify-center">
+                        <ep-checkbox size="sm"></ep-checkbox>
+                    </div>
+                </th>
+                }
+                @for (h of headers; track $index) {
+                <th [ngClass]="headCellClass()">
+                    <div class="flex items-center"
+                         [ngClass]="getJustify(h.align)">
+                        {{ h.title }}
+                    </div>
+                </th>
+                }
+            </tr>
+        </thead>
+        }
+
+        <tbody [ngClass]="bodyClass()">
+            @for (row of paginatedData(); track $index) {
+            <tr class="w-full cursor-pointer"
+                [ngClass]="bodyRowClass()"
+                [class.group]="variant()==='separated'">
+                @if(selectable){
+                <td [ngClass]="bodyCellClass()">
+                    <div class="flex items-center justify-center">
+                        <ep-checkbox size="sm"></ep-checkbox>
+                    </div>
+                </td>
+                }
+                @for(h of headers; track h.key){
+                <td [ngClass]="bodyCellClass()">
+                    <div class="flex items-center"
+                         [ngClass]="getJustify(h.align)">
+                        <!-- Si hay template registrado para la key, úsalo -->
+                        @if (columnTemplates[h.key]) {
+                        <ng-container [ngTemplateOutlet]="columnTemplates[h.key].template"
+                                      [ngTemplateOutletContext]="{ value: row[h.key], row: row }">
+                        </ng-container>
+                        }@else {
+                        {{ row[h.key] ?? '' }}
+                        }
+                    </div>
+                </td>
+                }
+            </tr>
+            }
+        </tbody>
+
+        @if(footerTemplates.length){
+        <tfoot class="bg-ep-body dark:bg-ep-body-dark font-semibold"
+               [ngClass]="footClass()">
+            <tr>
+                @if(selectable){
+                <td [ngClass]="footCellClass()"></td>
+                }
+
+                <!-- Si existe un footer global -->
+                @if(columnFooters['__global']){
+                <td [ngClass]="footCellClass()"
+                    [attr.colspan]="headers.length">
+                    <ng-container [ngTemplateOutlet]="columnFooters['__global'].template"></ng-container>
+                </td>
+                } @else {
+                @for (cell of getFooterCells(); track cell.key) {
+                <td [attr.colspan]="cell.colspan"
+                    [ngClass]="footCellClass()">
+                    @if(cell.template){
+                    <ng-container [ngTemplateOutlet]="cell.template"></ng-container>
+                    }
+                </td>
+                }
+                }
+            </tr>
+        </tfoot>
+        }
+
+
+    </table>
+</div>
+@if(hasPaginator){
+<ep-paginator [totalItems]="totalPages()"
+              [(currentPage)]="currentPage"
+              [totalItems]="totalItems()"
+              [itemsPerPage]="itemsPerPage()"
+              [size]="size()" />
+}
+
+<ng-content select="ng-template[epColumn]"></ng-content>

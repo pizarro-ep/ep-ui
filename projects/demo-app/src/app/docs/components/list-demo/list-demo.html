@@ -1,0 +1,199 @@
+<app-partial [documentation]="documentation"
+             [data]="data">
+    <ep-card variant="text">
+        <ng-template epContent>
+            <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-3">
+                <div class="flex w-full h-full items-center justify-center min-h-24">
+                    <ep-list [variant]="variant ?? 'text'"
+                             [color]="color ?? 'secondary'"
+                             [selectedColor]="selectedColor"
+                             [size]="size ?? 'md'"
+                             [rounded]="rounded"
+                             [space]="space"
+                             [hoverable]="hoverable"
+                             (onItemClick)="itemClickEventParent($event)"
+                             [items]="withItems ? items : []">
+                        @if(!withItems){
+                        <ep-list-item [value]="value"
+                                      [label]="label ?? 'List 1'"
+                                      [subLabel]="subLabel"
+                                      [route]="route"
+                                      [prependIcon]="prependIcon ? 'star' : undefined "
+                                      [appendIcon]="appendIcon ? 'star' : undefined "
+                                      [expandable]="expandable"
+                                      [expandedIcon]="expandedIcon"
+                                      [divider]="divider"
+                                      [selected]="selected"
+                                      [disabled]="disabled"
+                                      [expanded]="expanded">
+                            @if(slotPrepend){
+                            <ng-template epPrepend>
+                                PREPEND
+                            </ng-template>
+                            }
+                            @if(slotAppend){
+                            <ng-template epAppend>
+                                APPEND
+                            </ng-template>
+                            }
+                            @if(slotChildLists){
+                            <ep-list>
+                                <ep-list-item label="Child List 1.1" />
+                                <ep-list-item label="Child List 1.2" />
+                            </ep-list>
+                            }
+                        </ep-list-item>
+                        }
+                        @if(!withItems){
+                        <ep-list-item label="List 2"
+                                      [divider]="true"
+                                      [expandable]="true">
+                            <ep-list>
+                                <ep-list-item label="Sub List 2.1 {{onItemClickChild ? '(Item click)' : ''}}"
+                                              subLabel="Lorem ipsum dolor sit amet."
+                                              appendIcon="star"
+                                              (onItemClick)="itemClickEventChild($event)"
+                                              prependIcon="shield_person" />
+                                <ep-list-item label="Sub List 2.2"
+                                              subLabel="Lorem ipsum dolor sit amet."
+                                              appendIcon="star"
+                                              prependIcon="shield_person" />
+                            </ep-list>
+                        </ep-list-item>
+                        }
+                    </ep-list>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex w-max">
+                            <div epDivider="variant-vertical opacity-30"></div>
+                        </div>
+                        <div class="flex h-max">
+                            <div epDivider="opacity-30"></div>
+                        </div>
+                    </div>
+                    <div class="grid w-full grid-cols-2 gap-x-2.5 gap-y-2 items-center">
+                        <ep-select size="xs"
+                                   label="Variant"
+                                   [items]="mapVariants"
+                                   [(ngModel)]="variant"></ep-select>
+                        <ep-select size="xs"
+                                   label="Color"
+                                   [items]="mapColors"
+                                   [(ngModel)]="color"></ep-select>
+                        <ep-select size="xs"
+                                   label="Selected Color"
+                                   [items]="mapColors"
+                                   [(ngModel)]="selectedColor"></ep-select>
+                        <ep-select size="xs"
+                                   label="Size"
+                                   [items]="mapSizes"
+                                   [(ngModel)]="size"></ep-select>
+                        <ep-select size="xs"
+                                   label="Rounded"
+                                   [items]="mapRoundeds"
+                                   [(ngModel)]="rounded"></ep-select>
+                        <ep-select size="xs"
+                                   label="Space"
+                                   [items]="mapSpaces"
+                                   [(ngModel)]="space"></ep-select>
+                        <ep-checkbox size="sm"
+                                     label="Hoverable"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="hoverable"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Items"
+                                     [(ngModel)]="withItems"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Item Click"
+                                     [(ngModel)]="onItemClickParent"></ep-checkbox>
+                        <div epDivider="opacity-20"
+                             class="col-span-2 mb-2"></div>
+                        <ep-input size="xs"
+                                  label="Value"
+                                  [(ngModel)]="value"></ep-input>
+                        <ep-input size="xs"
+                                  label="Label"
+                                  [(ngModel)]="label"></ep-input>
+                        <ep-input size="xs"
+                                  label="Sub Label"
+                                  [(ngModel)]="subLabel"></ep-input>
+                        <ep-input size="xs"
+                                  label="Route"
+                                  [(ngModel)]="route"></ep-input>
+                        <ep-checkbox size="sm"
+                                     label="Expandable"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="expandable"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Expanded"
+                                     [(ngModel)]="expanded"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Expanded Icon"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="expandedIcon"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Divider"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="divider"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Selected"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="selected"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Disabled"
+                                     [indeterminate]="true"
+                                     [(ngModel)]="disabled"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Prepend Icon"
+                                     [(ngModel)]="prependIcon"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Append Icon"
+                                     [(ngModel)]="appendIcon"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     [disabled]="!!withItems"
+                                     label="Slot: Prepend"
+                                     [(ngModel)]="slotPrepend"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     [disabled]="!!withItems"
+                                     label="Slot: Append"
+                                     [(ngModel)]="slotAppend"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     [label]="withItems ? 'Children List' :  'Slot: Children List'"
+                                     [(ngModel)]="slotChildLists"></ep-checkbox>
+                        <ep-checkbox size="sm"
+                                     label="Item Click"
+                                     [disabled]="!!withItems"
+                                     [(ngModel)]="onItemClickChild"></ep-checkbox>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template epActions>
+            <ep-card variant="tonal">
+                <ng-template epContent>
+                    <app-code [codeTemplate]="getCodeTemplate"
+                              [codeScript]="getCodeScript" />
+                </ng-template>
+            </ep-card>
+        </ng-template>
+    </ep-card>
+</app-partial>
+
+<div epDivider="opacity-20"></div>
+
+<div class="grid gap-3">
+    <div class="grid">
+        <span epText="color-primary weight-semibold size-2xl">
+            Interfaces
+        </span>
+        <span epText="color-subtitle size-md">
+            A continuación se muestra las interfaces disponibles para &lt;ep-list&gt;
+        </span>
+    </div>
+    <ep-card variant="tonal">
+        <ng-template epContent>
+            <pre class="overflow-x-auto"><code class="text-ep-xs leading-0 whitespace-pre">{{ interfaces }}</code></pre>
+        </ng-template>
+    </ep-card>
+</div>

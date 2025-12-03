@@ -1,0 +1,51 @@
+<button [id]="id"
+        [type]="type() === 'icon' ? 'button': type"
+        [disabled]="disabled()"
+        class="inline-flex items-center justify-center gap-2 
+        text-center uppercase font-bold select-none line-clamp-1
+        transition-all duration-200 ease-in-out
+        cursor-pointer
+        disabled:opacity-50
+        disabled:pointer-events-none"
+        [ngClass]="buttonClass()"
+        [class.w-full]="block">
+
+    @if(type() === 'icon'){
+
+    <div class="inline-flex items-center shrink-0">
+        @if(buttonIcon){
+        <ng-content select="ep-icon"></ng-content>
+        }@else {
+        <ep-icon [size]="size()"
+                 [icon]="icon" />
+        }
+    </div>
+
+    }@else {
+
+    @if(prependIcon) {
+    <ep-icon [size]="size()"
+             [icon]="prependIcon" />
+    }
+
+    <div class="inline-flex items-center
+            text-ellipsis whitespace-nowrap truncate
+            overflow-hidden">
+        @if(contentTpl) {
+        <ng-container *ngTemplateOutlet="contentTpl.template"></ng-container>
+        }@else if(value){
+        {{value}}
+        }@else {
+        BUTTON
+        }
+    </div>
+
+    @if(appendIcon) {
+    <div class="inline-flex items-center shrink-0">
+        <ep-icon [size]="size()"
+                 [icon]="appendIcon" />
+    </div>
+    }
+
+    }
+</button>

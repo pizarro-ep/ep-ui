@@ -1,0 +1,104 @@
+<!-- Backdrop -->
+@if(show()){
+<div class="fixed inset-0 z-50
+            flex items-center justify-center
+            px-2 sm:px-3 pt-8 pb-4
+            bg-black/50
+            transition-opacity duration-300
+            opacity-100 starting:opacity-0
+            overflow-y-auto"
+     [class.pointer-events-none]="!show()"
+     (click)="onBackdropClick($event)">
+    <!-- Contenedor del modal -->
+    <div class="flex flex-col items-center
+                min-w-sm
+                bg-ep-surface dark:bg-ep-surface-dark
+                p-4 gap-3
+                transition-discrete duration-300
+                translate-y-0 starting:translate-y-10
+                rounded-lg
+                shadow-xl"
+         [class.w-full]="variant() === 'popup'"
+         [class.max-w-md]="variant() === 'popup'"
+         [class.w-max]="variant() === 'static'"
+         [class.max-w-2xl]="variant() === 'static'"
+         (click)="$event.stopPropagation()">
+        <div class="flex w-full items-center gap-4"
+             [class.justify-center]="variant() === 'popup'"
+             [class.justify-between]="variant() === 'static'">
+            <div class="inline-flex gap-3 items-center">
+                <ep-icon class="rounded-full shrink-0"
+                         [ngClass]="iconClass()"
+                         [icon]="icon() === 'success' ? 'check' : icon() === 'warning' ? 'exclamation' : icon() === 'error' ? 'x' : icon() === 'info' ? 'info' : icon()">
+                </ep-icon>
+                <!-- Título (proyección o fallback) -->
+                @if(variant() === "static"){
+                <ng-container *ngTemplateOutlet="titleBlock"></ng-container>
+                }
+            </div>
+            @if(variant() === 'static'){
+            <div class="inline-flex items-center justify-center size-6 shrink-0
+                            text-ep-sm
+                            text-ep-secondary dark:text-ep-secondary-dark
+                            hover:text-ep-error dark:hover:text-ep-error-dark
+                            hover:bg-ep-error/20 dark:hover:bg-ep-error-dark/20
+                            rounded"
+                 (click)="onClose()">
+                <ep-icon icon="x"></ep-icon>
+            </div>
+            }
+        </div>
+
+        <!-- Título (proyección o fallback) -->
+        @if(variant() === 'popup'){
+        <ng-container *ngTemplateOutlet="titleBlock"></ng-container>
+        }
+
+        <!-- Contenido -->
+        @if(contentTpl){
+        <ng-container *ngTemplateOutlet="contentTpl.template"></ng-container>
+        }@else if(subLabel) {
+        <span class="text-ep-subtitle dark:text-ep-subtitle-dark"
+              [ngClass]="modalSubLabelClass()">
+            {{ subLabel }}
+        </span>
+        }
+
+        <!-- Acciones -->
+        @if(actionsTpl){
+        <ng-container *ngTemplateOutlet="actionsTpl.template"></ng-container>
+        } @else {
+        <div class="flex justify-center gap-2 mt-1">
+            @if (confirmButtonShow) {
+            <ep-button [color]="confirmButtonColor"
+                       [value]="confirmButtonText"
+                       (click)="confirm()" />
+            }
+            @if (denyButtonShow) {
+            <ep-button [color]="denyButtonColor"
+                       [value]="denyButtonText"
+                       (click)="deny()" />
+            }
+            @if (cancelButtonShow) {
+            <ep-button [color]="cancelButtonColor"
+                       [value]="cancelButtonText"
+                       (click)="cancel()" />
+            }
+        </div>
+        }
+    </div>
+</div>
+}
+
+<ng-template #titleBlock>
+    @if (label) {
+    <h2 class="text-ep-subtitle dark:text-ep-subtitle-dark font-bold text-ellipsis"
+        [class.text-center]="variant() === 'popup'"
+        [class.line-clamp-3]="variant() === 'popup'"
+        [class.text-left]="variant() === 'static'"
+        [class.line-clamp-1]="variant() === 'static'"
+        [ngClass]="modalLabelClass()">
+        {{ label }}
+    </h2>
+    }
+</ng-template>

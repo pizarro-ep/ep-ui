@@ -1,0 +1,45 @@
+<div class="grid w-full gap-2 overflow-x-auto">
+    @if(hasText && textPosition === 'top') {
+    <ng-container *ngTemplateOutlet="textBlock"></ng-container>
+    }
+
+    <nav aria-label="Page navigation"
+         class="flex items-center justify-center w-full">
+        <ul class="flex justify-center space-x-0.5 select-none">
+            @for (page of pages(); track page) {
+            <li>
+                @if (page === '…') {
+                <div class="inline-flex items-center h-full leading-0 px-1 pb-1 text-gray-500"
+                     [ngClass]="textClass()">
+                    …
+                </div>
+                } @else {
+                <div [ngClass]="buttonContainerClass()">
+                    <ep-button [size]="size()"
+                               [rounded]="rounded"
+                               [color]="color"
+                               [variant]="isCurrentPage(page) ? 'tonal' : 'text'"
+                               (click)="changePage(page)"
+                               [class.pointer-events-none]="isCurrentPage(page)"
+                               [class.opacity-50]="isCurrentPage(page)"
+                               [value]="page.toString()"
+                               [block]="true">
+                    </ep-button>
+                </div>
+                }
+            </li>
+            }
+        </ul>
+    </nav>
+
+    @if(hasText && textPosition === 'bottom') {
+    <ng-container *ngTemplateOutlet="textBlock"></ng-container>
+    }
+</div>
+
+<ng-template #textBlock>
+    <div class="text-center text-ep-subtitle dark:text-ep-subtitle-dark"
+         [ngClass]="textClass()">
+        {{ text() }}
+    </div>
+</ng-template>

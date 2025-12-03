@@ -1,0 +1,52 @@
+@if(visible){
+<div class="inline-flex items-center justify-center gap-1.5
+        max-w-full
+        text-center font-medium select-none
+        transition-all duration-200 ease-in-out
+        overflow-hidden
+        cursor-default"
+     [ngClass]="chipClass()"
+     [class.opacity-50]="disabled()"
+     [class.pointer-events-none]="disabled()">
+
+    @if(prependIcon){
+    <div class="inline-flex items-center shrink-0">
+        <ep-icon [icon]="prependIcon"
+                 [size]="size()" />
+    </div>
+    }
+
+    <span class="inline-flex items-center
+                text-ellipsis whitespace-nowrap truncate
+                overflow-hidden">
+
+        @if(contentTpl){
+        <ng-container *ngTemplateOutlet="contentTpl.template"></ng-container>
+        }@else if (label) {
+        {{label}}
+        } @else {
+        EpChip
+        }
+
+    </span>
+
+    @if(appendIcon){
+    <div class="inline-flex items-center shrink-0">
+        <ep-icon [icon]="appendIcon"
+                 [size]="size()" />
+    </div>
+    }
+
+    @if (closable) {
+    <div class="inline-flex items-center shrink-0 brightness-75 dark:brightness-125">
+        <ep-button rounded="full"
+                   type="icon"
+                   [color]="color()"
+                   (click)="close($event)"
+                   [disabled]="disabled()"
+                   [size]="(size() === 'xs' || size() === 'sm') ? 'xs' : 'sm'"
+                   icon="close" />
+    </div>
+    }
+</div>
+}

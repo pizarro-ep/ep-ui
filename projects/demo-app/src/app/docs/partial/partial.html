@@ -1,0 +1,138 @@
+<div class="grid gap-2">
+    <span epText="color-primary weight-semibold size-3xl">
+        {{documentation.title}}
+    </span>
+    <span epText="color-subtitle size-md">
+        {{documentation.description}}
+    </span>
+</div>
+
+<div epDivider="opacity-20"></div>
+
+<div class="grid gap-2">
+    <span epText="color-primary weight-semibold size-2xl">
+        Uso
+    </span>
+    <span epText="color-subtitle size-md">
+        {{documentation.usage}}
+    </span>
+</div>
+
+<div epContainer="color-container rounded-md">
+    <ng-content></ng-content>
+</div>
+
+<div epDivider="opacity-20"></div>
+
+<div class="grid">
+    <span epText="color-primary weight-semibold size-2xl">
+        Propiedades
+    </span>
+    <span epText="color-subtitle size-md">
+        {{documentation.props}}
+    </span>
+</div>
+
+<ep-table variant="separated"
+          [hasPaginator]="false"
+          [hoverable]="false"
+          [itemsPerPage]="100"
+          [headers]="headers"
+          [items]="data"
+          size="sm">
+    <ng-template epColumn="prop"
+                 let-row="row">
+        <span class="text-nowrap"
+              [epText]="getTextClass(row.type)">{{row.prop}}</span>
+    </ng-template>
+    <ng-template epColumn="type"
+                 let-row="row">
+        <div class="flex items-center gap-3">
+            <span class="text-left">
+                <!-- Si tiene base (ModelSignal, ...) -->
+                @if(row.type?.base) {
+                <span epText="color-success weight-semibold">{{ row.type.base }}</span>
+
+                <!-- Si tiene opciones internas -->
+                @if(row.type.options?.length) {
+                <span epText="color-error opacity-75">&lt;</span>
+                @if(isArray(row.type.options)){
+                @for(opt of row.type.options; track opt; let last = $last) {
+                <span [epText]="getColorText(opt)">
+                    {{ formatText(opt) }}
+                </span>
+                @if(!last) {
+                <span epText="color-error weight-bold opacity-75"> | </span>
+                }
+                }
+                }@else {
+                <span epText="color-warning opacity-75 weight-medium">
+                    {{ row.type.options }}
+                </span>
+                }
+                <span epText="color-error opacity-75">&gt;</span>
+                }
+                }
+
+                <!-- Si el tipo es un string plano -->
+                @else if (isArray(row.type)) {
+                @for(item of row.type; track item; let last = $last) {
+                <span [epText]="getColorText(item)">
+                    {{ formatText(item) }}
+                </span>
+                @if(!last) { <span epText="color-error weight-bold opacity-75"> | </span> }
+                }
+                }
+                @else {
+                <span epText="color-primary opacity-75">{{  row.type }}</span>
+                }
+            </span>
+            @if(row.link) {
+            <a [href]="row.link.url"
+               [epTooltip]="row.link.text ? ('Ir a ' + row.link.text) : 'Ir a la documentación'"
+               [target]="row.type ?? 'self'"
+               [delay]="600"
+               class="inline-flex items-center">
+                <ep-icon icon="link"
+                         size="md"
+                         class="hover:text-ep-primary"></ep-icon>
+            </a>
+            }
+        </div>
+    </ng-template>
+    <ng-template epColumn="default"
+                 let-row="row">
+        <span [epText]="getColorText(row.default)">
+            {{ formatText(row.default) }}
+        </span>
+    </ng-template>
+    <ng-template epColumn="description"
+                 let-row="row">
+        <div class="grid">
+            <span>{{row.description}}</span>
+            @if(row.requirements){
+            <span class="mt-2">Requiere instalar:</span>
+            @for(req of row.requirements; track req;){
+            <span class="flex items-center">
+                <ep-icon icon="workspaces"
+                         size="3xs"
+                         class="mr-1" />
+                @if(req.link) {
+                <a [href]="req.link"
+                   [epTooltip]="req.name ? ('Ir a ' + req.name) : 'Ir a la documentación'"
+                   target="_blank"
+                   [delay]="600">
+                    <span class="text-nowrap text-ellipsis font-medium hover:text-ep-primary">{{req.lib}}</span>
+                </a>
+                }@else {
+                <span class="text-nowrap text-ellipsis">{{req.lib}}</span>
+                }
+                @if(req.version){
+                <span class="text-nowrap">: {{req.version}}</span>
+                }
+            </span>
+            }
+            }
+        </div>
+    </ng-template>
+</ep-table>

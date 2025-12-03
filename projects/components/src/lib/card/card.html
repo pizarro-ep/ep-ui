@@ -1,0 +1,84 @@
+@if(href) {
+<a [href]="href"
+   [ngClass]="cardClass()"
+   class="grid w-full max-w-full max-h-full"
+   [class.opacity-50]="disabled()"
+   [class.pointer-events-none]="disabled()">
+    <ng-container *ngTemplateOutlet="cardElements"></ng-container>
+</a>
+} @else {
+<div [ngClass]="cardClass()"
+     class="grid w-full max-w-full max-h-full"
+     [class.opacity-50]="disabled()"
+     [class.pointer-events-none]="disabled()">
+    <ng-container *ngTemplateOutlet="cardElements"></ng-container>
+</div>
+}
+
+<ng-template #cardElements>
+    @if(!labelTpl && !label && !subLabelTpl && !subLabel && !text && !contentTpl && !actionsTpl){
+    EpCard
+    }
+
+    @if(labelTpl || label || subLabelTpl || subLabel){
+
+    <div class="flex w-full gap-2 items-center">
+
+        @if(prependIcon){
+        <ep-icon [icon]="prependIcon"
+                 [size]="size()" />
+        }
+
+        <div class="flex w-full flex-col gap-0.5 items-start justify-center">
+
+            @if(labelTpl){
+            <span class="leading-none origin-left select-none font-bold"
+                  [ngClass]="labelClass()">
+                <ng-container [ngTemplateOutlet]="labelTpl.template"></ng-container>
+            </span>
+            }@else if(label) {
+            <span class="leading-none origin-left select-none font-bold"
+                  [ngClass]="labelClass()">
+                {{ label }}
+            </span>
+            }
+
+            @if(subLabelTpl){
+            <span class="leading-none origin-left select-none opacity-90 font-medium"
+                  [ngClass]="subLabelClass()">
+
+                <ng-container [ngTemplateOutlet]="subLabelTpl.template"></ng-container>
+            </span>
+            }@else if(subLabel) {
+            <span class="leading-none origin-left select-none opacity-90 font-medium"
+                  [ngClass]="subLabelClass()">
+                {{ subLabel }}
+            </span>
+            }
+        </div>
+
+        @if(appendIcon){
+        <ep-icon [icon]="appendIcon"
+                 [size]="size()" />
+        }
+
+    </div>
+
+    }
+
+    @if(contentTpl){
+    <div class="w-full max-w-full text-left wrap-anywhere">
+        <ng-container [ngTemplateOutlet]="contentTpl.template"></ng-container>
+    </div>
+    }@else if(text) {
+    <div class="w-full max-w-full text-left wrap-anywhere">
+        {{text}}
+    </div>
+    }
+
+    @if(actionsTpl){
+    <div class="inline-block w-full">
+        <ng-container [ngTemplateOutlet]="actionsTpl.template"></ng-container>
+    </div>
+    }
+</ng-template>
